@@ -16,6 +16,16 @@
 - ✅ User Detail Page (note that data are random so when clicked on a page it fetches data for specific ID but data from backend are always random)
 
 
+## Demo:
+
+# Desktop:
+
+https://github.com/user-attachments/assets/7f6ddae2-5814-4025-8bf8-d70a635925dc
+
+# Mobile
+
+https://github.com/user-attachments/assets/d6dd4f73-3875-4d7d-bb5c-2579d7297921
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
