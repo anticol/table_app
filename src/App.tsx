@@ -1,26 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { TableWithData } from './components/UsersTable/TableWithData';
+import styled from 'styled-components';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { UserDetailPage } from './components/UserDetail';
 
 function App() {
+  const queryClient = new QueryClient();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <Wrapper>
+        <Router>
+          <Routes>
+            <Route path="/" element={<TableWithData />} />
+            <Route path="/users/:userId" element={<UserDetailPage />} />
+          </Routes>
+        </Router>
+      </Wrapper>
+    </QueryClientProvider>
   );
 }
 
 export default App;
+
+const Wrapper = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px;
+
+  @media (max-width: 600px) {
+    padding: 16px;
+  }
+`;
