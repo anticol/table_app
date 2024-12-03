@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
     Table,
     TableHead,
@@ -28,7 +28,7 @@ import { User } from "../../types/User";
 import { useNavigate } from "react-router-dom";
 import { userTableColumns } from "./tableScheme";
 
-export const TableWithData = () => {
+export const UsersTable = () => {
     const [search, setSearch] = useState("");
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);

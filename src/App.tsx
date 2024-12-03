@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { TableWithData } from './components/UsersTable/TableWithData';
+import { UsersTable } from './components/UsersTable';
 import styled from 'styled-components';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { UserDetailPage } from './components/UserDetail';
@@ -12,7 +12,7 @@ function App() {
       <Wrapper>
         <Router>
           <Routes>
-            <Route path="/" element={<TableWithData />} />
+            <Route path="/" element={<UsersTable />} />
             <Route path="/users/:userId" element={<UserDetailPage />} />
           </Routes>
         </Router>
