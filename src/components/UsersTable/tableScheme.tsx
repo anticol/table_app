@@ -2,6 +2,7 @@ import { Avatar } from "@mui/material";
 import { TableColumn } from "../../types/Table";
 import dayjs from "dayjs";
 
+// Define the columns for the table, easily extendable with custom render functions and sort option
 export const userTableColumns: TableColumn[] = [
     { label: "ID", field: "id", sortable: true },
     {

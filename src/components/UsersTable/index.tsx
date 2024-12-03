@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import {
     Table,
     TableHead,
@@ -39,17 +39,19 @@ export const UsersTable = () => {
 
     const { data, isLoading, isError, refetch } = useUsers(100);
 
-    if (isLoading) return <Loading />;
-    if (isError) return <Error refetch={refetch} />;
+    const handleRowClick = (id: number) => navigate(`/users/${id}`);
 
-    const filteredData = filterData(data || [], search);
-    const sortedData = sortField
-        ? sortData(filteredData, sortField as keyof User, sortOrder)
-        : filteredData;
+
+    const filteredData = useMemo(() => filterData(data || [], search), [data, search]);
+
+    const sortedData = useMemo(() => sortField ? sortData(filteredData, sortField as keyof User, sortOrder) : filteredData, [filteredData, sortField, sortOrder]);
 
     const paginatedData = paginateData(sortedData, page, rowsPerPage);
 
     const csvData = generateCsvData(filteredData);
+
+    if (isLoading) return <Loading />;
+    if (isError) return <Error refetch={refetch} />;
 
     return (
         <>
@@ -59,7 +61,7 @@ export const UsersTable = () => {
             <Box textAlign="right" marginY={2}>
                 <CSVLink data={csvData} filename="user_data.csv">
                     <Button variant="contained" color="primary">
-                        Export All Data to CSV
+                        Export all data to CSV
                     </Button>
                 </CSVLink>
             </Box>
@@ -69,7 +71,11 @@ export const UsersTable = () => {
                 fullWidth
                 margin="normal"
                 value={search}
-                onChange={(e) => setSearch(e.target.value)}
+                onChange={(e) => {
+                    setSearch(e.target.value);
+                    setPage(0);
+                }
+                }
             />
 
             <Box>
@@ -118,7 +124,7 @@ export const UsersTable = () => {
                             {paginatedData.map((user) => (
                                 <TableRow
                                     key={user.id}
-                                    onClick={() => navigate(`/users/${user.id}`)}
+                                    onClick={() => handleRowClick(user.id)}
                                     sx={{
                                         cursor: "pointer",
                                         transition: "box-shadow 0.2s ease-in-out",
@@ -145,7 +151,7 @@ export const UsersTable = () => {
                                     count={filteredData.length}
                                     rowsPerPage={rowsPerPage}
                                     page={page}
-                                    onPageChange={(event, newPage) => setPage(newPage)}
+                                    onPageChange={(_, newPage) => setPage(newPage)}
                                     onRowsPerPageChange={(event) =>
                                         setRowsPerPage(parseInt(event.target.value, 10))
                                     }
