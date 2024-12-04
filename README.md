@@ -1,4 +1,15 @@
 
+Zadanie React:
+- funkcionalna react single page app s tabulkou + pagination
+- typescript
+- data cez nejake public test API, napr. random-data-api.com, loading, odchytenie errorov
+- filter na data
+- flex resizing (data zobrazit inak pre PC vs mobile aspect)
+- lubovolna 3rd party UI kniznica
+- ukazka Jest testu
+
+
+
 ## 🚀 Features
 - **Responsive Design**: Fully responsive table layout built with Material-UI (MUI).
 - **Dynamic Data Rendering**: Displays data dynamically from an external data source.
